@@ -164,3 +164,46 @@ npm webpack server
 ## 以上完成了开发模式的配置
 
 ### 生产模式
++ 改造配置文件
+```js
+// npx webpack server --config ./config/webpack.dev.js
+
+// npx webpack --config ./config/webpack.prod.js
+
+//可以省略npx
+"scripts": {
+    "start":"npm run dev",
+    "dev":"webpack server --config ./config/webpack.dev.js",
+    "build":"webpack --config ./config/webpack.prod.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+```
+
+### 提取css为单独的文件
+```js
+//webpack5的新插件
+npm install --save-dev mini-css-extract-plugin
+```
+
+
+### css样式兼容性处理
+```js
+//css样式兼容性处理
+npm install postcss-loader postcss postcss-preset-env -D
+```
++ package.json
+```
+"browserslist":[
+    "last 2 version",
+    "> 1%",
+    "not dead"
+  ]
+```
+
+### css压缩
+```js
+//webpack5的新插件
+npm install css-minimizer-webpack-plugin --save-dev
+```
+
+### html和js在开启生产模式时默认就是压缩的

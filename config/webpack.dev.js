@@ -6,10 +6,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     entry: './src/main.js',
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        //开发模式没有输出
+        path: undefined,
+        // path: path.resolve(__dirname, 'dist'),
         filename: 'static/js/main.js',
         //webpack4需要插件实现
-        clean: true, //打包前清空dist目录内容
+        // clean: true, //打包前清空dist目录内容
     },
     module: {
         rules: [
@@ -70,11 +72,11 @@ module.exports = {
     plugins: [
         //plugin的配置
         new ESLintPlugin({
-            context:path.resolve(__dirname,'src')
+            context:path.resolve(__dirname,'../src')  //绝对路径回退一层目录
         }),
         //保留之前的dom结构
         new HtmlWebpackPlugin({
-            template:path.resolve(__dirname,'public/index.html')
+            template:path.resolve(__dirname,'../public/index.html')
         })
     ],
     //开发服务器：不会输出资源，在内存中编译打包的
