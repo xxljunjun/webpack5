@@ -207,3 +207,59 @@ npm install css-minimizer-webpack-plugin --save-dev
 ```
 
 ### html和js在开启生产模式时默认就是压缩的
+
+### sourceMap
++ 源代码映射：是一个用来生产源代码与构建后代码---映射文件的方案
+```js
+为什么
+是什么
+怎么用
+// 增强调试，解决bug快速
+```
++ devtool:'cheap-module-source-map'
+```
+只映射行
+```
++ devtool:'source-map'
+```
+映射行、列
+```
+
+### 提升打包构建速度
++ 热模块替换：HotModuleReplacement
+```js
+//在程序运行中，替换。添加或删除模块，则无需重写加载整个页面 
+
+//更改其中一个模块，所有的模块都会重新打包
+
+hot:true
+//开启hmr功能，只能用于开发环境，生产环境不需要
+
+if(module.hot){
+    //判断是否支持热模块替换功能
+    module.hot.accept('./js/sum')
+    // vue-loader、react-hot-loader帮助我们实现了热模块替换功能
+}
+```
+
+### oneOf
+```
+只匹配一个loader，剩下的就不匹配了
+```
+
+### Include/Exclude
+```
+在对js文件处理时，因为使用的第三方库不需要我们在做处理了
+```
+
+### Eslint和Babel编译速度慢
+```js
+提升的是第二次，第三次打包速度，缓存起来
+// 通过配置项去配置
+```
+
+### eslint/babel/thead
++ 多进程打包：开启电脑的多个进程干同一件事情，速度更快
+```
+npm install thread-loader -D
+```
