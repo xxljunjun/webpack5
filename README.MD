@@ -8,6 +8,7 @@ npm install webpack webpack-cli -D
 npx webpack ./src/main.js --mode=development  //开发模式只编译不压缩
 
 npx webpack ./src/main.js --mode=production  //生产模式：自执行函数,会编译会压缩代码
+
 ```
 
 ### webpack的五个核心概念
@@ -163,6 +164,7 @@ npm webpack server
 
 ## 以上完成了开发模式的配置
 
+
 ### 生产模式
 + 改造配置文件
 ```js
@@ -262,4 +264,105 @@ if(module.hot){
 + 多进程打包：开启电脑的多个进程干同一件事情，速度更快
 ```
 npm install thread-loader -D
+```
+
+### tree shaking
+```js
+//生成环境自动开启无需配置
+//清除js无用的代码
+```
+
+### 压缩babel生成的文件体积
+```
+插件
+```
+
+### 压缩图片体积
+```
+体积
+```
+
+### 代码分割
+```js
+打包时会把所有的js文件打包到一个文件夹中，利用代码分割生成多个js文件，
+渲染某个页面就加载某个js文件，即使在资源减少，速度变快
+```
++ 可以是多个入口实现js分割
+```
+entry: {
+    app:'./src/app.js',
+    main:./src/main.js',
+},
+```
++ 在weboack.dev.js中配置，生成多个js文件
+```js
+//配置项
+optimization:{
+    splitChunks:{
+        chunks:'all', //js代码分割
+        default:{
+
+        }
+    }
+}
+```
+
+### 按需加载模块
++ import动态导入
+```
+
+```
++ 给动态导入的文件取名字
+```js
+import(/*webpackChunkName:"math"*/.js/nath).then((res)=>{
+
+})
+chunkFilename:'static/js/[name].chunk.js'
+assetModuleFilename:'static/media/[hash:10][ext][query]'
+```
+
+### 命名规范
+```js
+assetModuleFilename:'static/media/[hash:10][ext][query]'
+```
+
+### preload/prefetch
+```
+浏览器在空闲的时候再去加载js文件
+```
+
+### Network catch
+```js
+//一个文件变化时，另一个文件不会因为hash值的文件名变化而变化
+optimization:{
+    runtimeChunk:{
+        name:(entrypoint)=>`runtime~${entrypoint.name}.js`
+    }
+}
+```
+
+
+### core-js：浏览器兼容性解决方案！！！
++ 可以按需引入
+```js
+例如new promise
+// 是专门用来做ES6以及以上API的polyfill
+// polyfill翻译过来叫做垫片/补丁，就是用社区上提供的一段代码，让我们在不兼容某些特性浏览器上，使用该特性
+```
+
+### PWA,兼容性比较差
+```js
+// 开发webApp项目，项目一旦处于网络离线情况，就没法访问了
+// 给项目提供离线体验
+
+//插件
+npm install workbox-webpack-plugin --save--dev
+```
+
+### 总结
+```
+1、提升开发体验
+2、提升打包速度
+3、减少代码体积
+4、优化代码运行性能
 ```

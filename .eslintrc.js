@@ -13,5 +13,6 @@ module.exports = {
     env:{
         node:true, //启用node的全局变量
         browser:true  //启用浏览器的全局变量
-    }
+    },
+    Plugins:['import'] //eslint不识别动态导入
 }
